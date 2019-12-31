@@ -4,11 +4,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import sys
 
 plt.figure()
 
 # 修改文件路径
-top_ab_file = os.getcwd() + "/performance"
+#top_ab_file = os.getcwd() + "/performance"
+top_ab_file = sys.argv[1]
 x_time = 0
 
 # x轴显示时间标签
@@ -41,7 +43,6 @@ with open(top_ab_file, 'r') as perf_file:
         totalmem += linemem
         line = perf_file.readline()
 
-# print("%d,%d"%(len(cpu),len(x_lable)))
 # cpu图
 x = range(0, i)
 # z = np.loadtxt(top_ab_file, delimiter=",", usecols=(x_cpu,), unpack=True)
@@ -89,11 +90,7 @@ plt.close()
 
 # mem图
 # y = np.loadtxt(top_ab_file, delimiter=",", usecols=(x_mem,), unpack=True)
-# 将获取的mem KB转成MB，保留两位小数
-# for item in range(0, i):
-#    mem[item] = round(mem[item], 2)
 plt.bar(x, mem, facecolor='#79b3f2', label='mem', edgecolor='none')
-# plt.plot(x, y, color='g', label='mem')
 # x轴显示时间的倾斜角
 plt.xticks(x_show, x_lable_show, fontsize=10, rotation=90)
 plt.subplots_adjust(bottom=0.19)
